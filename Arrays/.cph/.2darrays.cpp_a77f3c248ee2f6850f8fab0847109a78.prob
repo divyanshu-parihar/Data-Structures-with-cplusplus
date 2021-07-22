@@ -1,0 +1,1 @@
+{"name":"Local: 2darrays","url":"c:\\Users\\Admin\\Documents\\dsa\\Arrays\\2darrays.cpp","tests":[{"id":1626929371798,"input":"4 4 10\n1 2 3 4 \n3 32 5 2 \n234 2342 2532 2352\n2 5 2 5","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Admin\\Documents\\dsa\\Arrays\\2darrays.cpp","group":"local","local":true}
