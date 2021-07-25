@@ -1,23 +1,17 @@
 #include <iostream>
 using namespace std;
-
 int main() {
-    int a,b,c;
-    cin >> a >> b>> c;
-    int i ,j;
-    i = max(a,b);
-    j = max(i,c);
-    // cout << j;
-    if(j == c){
-        cout <<  max(a,b);
+    int a ,b,c;
+    cin >> a >>b >>c;
 
-    }else{
-        if(i == a){
-            cout << max(b,c);
-        }else{
-            cout << max(a,c);
-        }
+    if(a==b&& b==c){
+        cout << "1";
+
+    }else if(a==b && b==c && c==a){
+        cout << "2";
     }
-
-    return 0;
+    else if((a==b) & (a!=c)  || (a==c) & (a!=b) || (a==b) & (a!=c) || (c==b) & (c!=c)){
+        cout << "3";
+    }
 }
+
