@@ -10,7 +10,27 @@ class node {
         next = NULL;
     }
 };
+// <_-------------Searching in linked list ------------->
+bool search(node* &head,int val){
+    node* temp = head;
+    while(temp){
+        if(temp->data == val){
+            return true;
+        }
+        temp = temp->next;
 
+    // cout << false;
+    }
+    return false;
+}
+
+// <---------------------searching end _---------------------->
+void insertAtHead(node* &head,int val){
+    node* n = new node(val);
+    n->next = head;
+    head = n;
+}
+// <---------------insert value at the end of the linked list and at head if NULL-------------->
 void insertAtTail(node* &head,int val){
     node* n = new node(val);
     if (head == NULL) {
@@ -23,6 +43,95 @@ void insertAtTail(node* &head,int val){
     }
     temp->next = n;
 }
+// Deletions of nodes in Linked list 
+void deleteAtHead(node* &head){
+    node* todelete = head;
+    head = head->next;
+    delete head;
+    return;
+}
+void deleteNthNode(node* &head,int val){
+    node* todelete;
+    if(!head){
+        return;
+    }
+    if(!head->next){
+        todelete = head;
+        head = NULL;
+        delete todelete;
+        return;
+    }
+    node * temp = head; 
+    if(temp->data ==val){
+        head = temp->next;
+        return;
+    }
+
+    while(temp){
+        if(temp->next->data == val){
+            todelete = temp->next;
+            temp->next = temp->next->next;
+            delete todelete;
+            return ;
+        }
+        temp = temp->next;
+    }
+}
+
+// Reversing a linked list 
+// ITERATIVE METHOD
+node* reverseListIterative(node* &head){
+    node* previous = NULL;
+    node* current = head;
+    node* next;
+
+    while(current){
+        next = current->next;
+        current->next = previous;
+        previous = current;
+        current = next;
+    }
+    return previous;
+}
+// Recursive way
+node* reverseListRecursive(node* &head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    node* newhead = reverseListRecursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newhead;
+
+}
+
+// reversing k node groups
+
+node* reversek(node* &head , int k){
+    // base case
+    if (!head)
+        return NULL;
+    node* current = head;
+    node* next = NULL;
+    node* prev = NULL;
+    int count = 0;
+ 
+    /*reverse first k nodes of the linked list */
+    while (current != NULL && count < k) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+    if (next != NULL)
+        head->next = reversek(next, k);
+ 
+    /* prev is new head of the input list */
+    return prev;
+}
+
+// <-------util function ------------------>
 void display(node* head) {
     node* temp = head;
     while (temp != NULL) {
@@ -37,4 +146,16 @@ int main() {
     insertAtTail(head,2);
     insertAtTail(head,3);
     display(head);
+    insertAtHead(head,10);
+    display(head);
+    // cout << search(head,4);
+    deleteNthNode(head,1);
+    display(head);
+    // deleteAtHead(head);
+    // deleteAtHead(head);
+    // deleteAtHead(head);
+    display(head);
+    node* newhead = reverseListRecursive(head);
+    display(newhead);
+
  }
