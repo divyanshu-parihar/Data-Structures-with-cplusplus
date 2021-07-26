@@ -1,17 +1,27 @@
-#include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define FAST1 ios_base::sync_with_stdio(false);
+#define FAST2 cin.tie(NULL);
 int main() {
-    int a ,b,c;
-    cin >> a >>b >>c;
+    int n ;
+    cin >> n;
+    int arr[n];
 
-    if(a==b&& b==c){
-        cout << "1";
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    for(int i= 0;i<n;i++){
+        cout << arr[i];
+        string current = to_string(arr[i]);
+        for(int j= current.length()-1 ;i<=0;j--){
+            cout << current[j] ;
 
-    }else if(a==b && b==c && c==a){
-        cout << "2";
+        }
+        cout << endl;
+
+
     }
-    else if((a==b) & (a!=c)  || (a==c) & (a!=b) || (a==b) & (a!=c) || (c==b) & (c!=c)){
-        cout << "3";
-    }
+    
 }
-

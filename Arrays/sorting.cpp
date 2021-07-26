@@ -72,7 +72,7 @@ void merge(int A[], int mid, int low, int high) {
         k++;
         j++;
     }
-    for (int i = low; i <= high; i++) {
+    for (int i = low; i < high; i++) {
         A[i] = B[i];
     }
 }
