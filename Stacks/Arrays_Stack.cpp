@@ -20,7 +20,7 @@ bool Stack::push(int x) {
         cout << "STACK OVERFLOW";
         return false;
     } else {
-        ++top;
+        top++;
         a[top] = x;
         cout << x << " pushed into stack \n";
 
