@@ -49,11 +49,61 @@ struct node {
         right = NULL;
     }
 };
-int main(){
+void preorder(struct node* root ){
+    if(root){
+        cout << root->data << ' ';
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
 
+
+void postorder(struct node* root ){
+    if(root){
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->data << ' ';
+    }
+}
+void inorder(struct node* root ){
+    if(root){
+        inorder(root->left);
+        cout << root->data << ' ';
+        inorder(root->right);
+    }
+}
+// Searching in Binary Search Tree:
+
+struct node* searching(struct node* root , int key){
+    if(root == NULL){
+        return NULL;
+    }
+    if(root->data == key){
+        return root;
+    }
+    if(root->data > key){
+        return searching(root->left ,  key);
+    }else{
+        return searching(root->right,key);
+    }
+}
+
+int main(){
     struct node* root = new node(1);
     root->left = new node(2);
     root->right = new node(3);
+    root->left->left = new node(4);
+    root->left->right = new node(5);
+
+
+     cout << "\nPreorder traversal of binary tree is \n";
+    preorder(root);
+ 
+    cout << "\nInorder traversal of binary tree is \n";
+    inorder(root);
+ 
+    cout << "\nPostorder traversal of binary tree is \n";
+    postorder(root);
     return 0;
 
 }
