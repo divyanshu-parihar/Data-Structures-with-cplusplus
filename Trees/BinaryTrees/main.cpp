@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 /*
 
@@ -42,31 +42,29 @@ struct node {
     struct node* left;
     struct node* right;
 
-
-    node(int val){
+    node(int val) {
         data = val;
         left = NULL;
         right = NULL;
     }
 };
-void preorder(struct node* root ){
-    if(root){
+void preorder(struct node* root) {
+    if (root) {
         cout << root->data << ' ';
         preorder(root->left);
         preorder(root->right);
     }
 }
 
-
-void postorder(struct node* root ){
-    if(root){
+void postorder(struct node* root) {
+    if (root) {
         postorder(root->left);
         postorder(root->right);
         cout << root->data << ' ';
     }
 }
-void inorder(struct node* root ){
-    if(root){
+void inorder(struct node* root) {
+    if (root) {
         inorder(root->left);
         cout << root->data << ' ';
         inorder(root->right);
@@ -74,36 +72,105 @@ void inorder(struct node* root ){
 }
 // Searching in Binary Search Tree:
 
-struct node* searching(struct node* root , int key){
-    if(root == NULL){
+struct node* searching(struct node* root, int key) {
+    if (root == NULL) {
         return NULL;
     }
-    if(root->data == key){
+    if (root->data == key) {
+        cout << "found ";
         return root;
-    }
-    if(root->data > key){
-        return searching(root->left ,  key);
-    }else{
-        return searching(root->right,key);
+    } else if (root->data > key) {
+        return searching(root->left, key);
+    } else {
+        return searching(root->right, key);
     }
 }
+struct node* searchIter(struct node* root, int key) {
+    while (root != NULL) {
+        if (root == NULL) {
+            return NULL;
+        }
+        if (key == root->data) {
+            return root;
+        } else if (key < root->data) {
+            root = root->left;
+        } else {
+            root = root->right;
+        }
+    }
+    return NULL;
+}
+struct node* inOrderPredecessor(struct node* root){
+   root = root->left; 
+   while(root->right != NULL){
+       root = root->right;
+   }
+   return root;
+}
+void deleteNode(struct node* root ,int val){
+    struct node* ipre;
+    if(root == NULL){
+        return ;
+    }    
+    if(root->left == NULL && root->right == NULL){
+        free(root);
+        return ;
+   }
 
-int main(){
-    struct node* root = new node(1);
+
+    if(val < root->data ){
+        deleteNode(root->left, val);
+    }else if(val > root->data){
+        deleteNode(root->right, val);
+    }
+    else{
+        ipre = inOrderPredecessor(root);
+        root->data = ipre->data;
+        deleteNode(root->left,ipre->data);
+    }
+
+}
+void insert(struct node* root, int value)
+{
+    struct node* prev = NULL;
+
+    while (root != NULL){
+        prev = root;
+        if(value== root->data){
+            return ;
+        }
+
+        else if(value < root->data){
+            root = root->left;
+        }else{
+            root = root->right;
+        }
+    }
+    struct node* newNode = new node(value);
+    if(value < prev->data){
+        prev->left = newNode;
+    }else{
+        prev->right = newNode;
+    }
+    
+}
+int main() {
+    struct node* root = new node(3);
     root->left = new node(2);
-    root->right = new node(3);
-    root->left->left = new node(4);
-    root->left->right = new node(5);
+    root->right = new node(4);
+    // root->right->left = new node(0);
+    // root->right->right = new node(5);
 
+    //  cout << "\nPreorder traversal of binary tree is \n";
+    // preorder(root);
 
-     cout << "\nPreorder traversal of binary tree is \n";
-    preorder(root);
- 
-    cout << "\nInorder traversal of binary tree is \n";
-    inorder(root);
- 
-    cout << "\nPostorder traversal of binary tree is \n";
-    postorder(root);
+    // cout << "\nInorder traversal of binary tree is \n";
+    // inorder(root);
+
+    // cout << "\nPostorder traversal of binary tree is \n";
+    // postorder(root);
+    struct node* n = searching(root, 4);
+    insert(root,7);
+    cout << n->data;
     return 0;
-
 }
