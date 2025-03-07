@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 /*
 
 Degree: How many nodes are connected to a node.
