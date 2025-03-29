@@ -65,11 +65,6 @@ class Graph {
     int v;
     map<T,list<T>> l;
    public:
-    // Graph(int v) {
-    //     this->v = v;
-    //     l = new list<int>[v];  // returns new array of lists.
-    // }
-    // remove the second line in this function to make this Directed Graph
     void add(int x, int y) {
         l[x].push_back(y);
         l[y].push_back(x);
